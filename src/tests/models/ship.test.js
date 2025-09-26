@@ -1,4 +1,4 @@
-const Ship = require("../app/ship");
+const Ship = require("../../app/models/ship");
 
 describe("Ship Class", () => {
   test("creates ship with correct length", () => {

@@ -1,0 +1,33 @@
+.scoreboard {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+	background: #2c3e50;
+	color: white;
+	border-radius: 8px;
+	margin-bottom: 2rem;
+}
+
+.player-score {
+	text-align: center;
+	flex: 1;
+}
+
+.player-score h3 {
+	margin: 0 0 0.5rem 0;
+	font-size: 1.2rem;
+}
+
+.player-score .score,
+.player-score .hits {
+	font-size: 0.9rem;
+	margin: 0.2rem 0;
+}
+
+.vs {
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin: 0 2rem;
+	color: #e74c3c;
+}

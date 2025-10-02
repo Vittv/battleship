@@ -1,6 +1,7 @@
 require("./styles/main.css");
-const { init } = require("./app/app.js");
+const App = require("./app/app");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  init(document.getElementById("content"));
+  const app = new App();
+  app.init();
 });

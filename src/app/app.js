@@ -13,6 +13,21 @@ class App {
   init() {
     this.renderUI();
     this.setupEventListeners();
+    // ship placement phase for Player 1
+    const Player = require("./models/player");
+    const shipTypes = require("./models/shipTypes");
+    // create player instance and expose globally for debugging
+    this.player1 = new Player("Player 1", "human");
+    window.player1 = this.player1;
+    // prepare ships to place (largest to smallest)
+    const shipsToPlace = [
+      { name: "Carrier", length: shipTypes.CARRIER },
+      { name: "Battleship", length: shipTypes.BATTLESHIP },
+      { name: "Destroyer", length: shipTypes.DESTROYER },
+      { name: "Submarine", length: shipTypes.SUBMARINE },
+      { name: "Patrol Boat", length: shipTypes.PATROL_BOAT },
+    ];
+    this.playerBoard.startShipPlacement(this.player1, shipsToPlace);
   }
 
   renderUI() {

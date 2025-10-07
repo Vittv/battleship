@@ -18,6 +18,7 @@
 	grid-template-rows: repeat(10, 40px);
 	gap: 2px;
 	justify-content: center;
+  user-select: none;
 }
 
 .boards-container {

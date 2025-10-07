@@ -28,6 +28,20 @@ class App {
       { name: "Patrol Boat", length: shipTypes.PATROL_BOAT },
     ];
     this.playerBoard.startShipPlacement(this.player1, shipsToPlace);
+
+    // ship placement phase for CPU
+    const Ship = require("./models/ship");
+    // create ship instances for CPU
+    const cpuShips = [
+      new Ship(shipTypes.CARRIER),
+      new Ship(shipTypes.BATTLESHIP),
+      new Ship(shipTypes.DESTROYER),
+      new Ship(shipTypes.SUBMARINE),
+      new Ship(shipTypes.PATROL_BOAT),
+    ];
+    this.cpu = new Player("CPU", "computer");
+    window.cpu = this.cpu;
+    this.cpu.autoPlaceShips(cpuShips);
   }
 
   renderUI() {

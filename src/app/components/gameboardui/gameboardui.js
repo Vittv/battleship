@@ -15,7 +15,7 @@ class GameboardUI {
     }
   }
   // ship placement state
-  startShipPlacement(player, shipsToPlace) {
+  startShipPlacement(player, shipsToPlace, onComplete) {
     this.placingShips = true;
     this.player = player;
     this.shipsToPlace = shipsToPlace.slice(); // copy
@@ -24,6 +24,8 @@ class GameboardUI {
     this.lockedCells = new Set();
     this._setupPlacementListeners();
     this._showPlacementMessage();
+    this._onPlacementComplete =
+      typeof onComplete === "function" ? onComplete : null;
   }
 
   _setupPlacementListeners() {
@@ -121,6 +123,7 @@ class GameboardUI {
           "keydown",
           this._handleOrientationToggle.bind(this),
         );
+        if (this._onPlacementComplete) this._onPlacementComplete();
       } else {
         this._showPlacementMessage();
       }

@@ -1,0 +1,38 @@
+.game-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 1000;
+	transition: opacity 0.5s;
+}
+.modal-content {
+	background: white;
+	border-radius: 16px;
+	padding: 48px 32px 32px 32px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+	text-align: center;
+}
+.modal-title {
+	font-size: 3em;
+	margin-bottom: 32px;
+}
+.restart-btn {
+	font-size: 1.2em;
+	padding: 12px 32px;
+	border-radius: 8px;
+	border: none;
+	background: #007bff;
+	color: white;
+	cursor: pointer;
+	margin-top: 16px;
+}
+body.blurred #main {
+	filter: blur(6px);
+	pointer-events: none;
+}

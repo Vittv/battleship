@@ -170,6 +170,8 @@ class GameboardUI {
     this.playerName = playerName;
     this.isInteractive = isInteractive;
     this.size = 10;
+    this.shipsSunk = 0;
+    this.containerId = null;
   }
 
   render(containerId) {
@@ -178,10 +180,14 @@ class GameboardUI {
       console.error(`Container #${containerId} not found`);
       return;
     }
+    this.containerId = containerId;
 
     container.innerHTML = `
       <div class="gameboard-container">
-        <h3>${this.playerName}</h3>
+        <div class="board-header">
+          <div class="player-name">${this.playerName}</div>
+          <div class="score">💥 ${this.shipsSunk}</div>
+        </div>
         <div class="gameboard" data-player="${this.playerName.toLowerCase()}">
           ${this.generateGrid()}
         </div>
@@ -236,6 +242,17 @@ class GameboardUI {
         cell.textContent = "💥";
       } else if (status === "miss") {
         cell.textContent = "💦";
+      }
+    }
+  }
+
+  updateShipsSunk(count) {
+    this.shipsSunk = count;
+    const container = document.getElementById(this.containerId);
+    if (container) {
+      const scoreElement = container.querySelector(".score");
+      if (scoreElement) {
+        scoreElement.textContent = `💥 ${count}`;
       }
     }
   }

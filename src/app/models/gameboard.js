@@ -68,6 +68,10 @@ class Gameboard {
   allShipsSunk() {
     return this.ships.length > 0 && this.ships.every((ship) => ship.isSunk());
   }
+
+  getSunkShipsCount() {
+    return this.ships.filter((ship) => ship.isSunk()).length;
+  }
 }
 
 module.exports = Gameboard;

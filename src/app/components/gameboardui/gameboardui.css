@@ -7,6 +7,26 @@
 	margin: 1rem;
 }
 
+.board-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	max-width: 400px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.player-name {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.score {
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
 .gameboard-container h3 {
 	margin-bottom: 1rem;
 	color: #2c3e50;
@@ -18,7 +38,7 @@
 	grid-template-rows: repeat(10, 40px);
 	gap: 2px;
 	justify-content: center;
-  user-select: none;
+	user-select: none;
 }
 
 .boards-container {

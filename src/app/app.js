@@ -1,11 +1,8 @@
-require("./components/scoreboard/scoreboard.css");
 require("./components/gameboardui/gameboardui.css");
-const Scoreboard = require("./components/scoreboard/scoreboard");
 const GameboardUI = require("./components/gameboardui/gameboardui");
 
 class App {
   constructor() {
-    this.scoreboard = new Scoreboard();
     this.playerBoard = new GameboardUI("Player 1", true);
     this.enemyBoard = new GameboardUI("CPU", true);
     this.isPlayerTurn = true;
@@ -46,7 +43,6 @@ class App {
   }
 
   renderUI() {
-    this.scoreboard.render("scoreboard");
     this.playerBoard.render("player-board");
     this.enemyBoard.render("enemy-board");
   }
@@ -62,6 +58,12 @@ class App {
         const result = this.player1.attack(this.cpu.gameboard, x, y);
         // update enemy board UI with hit/miss feedback
         this.enemyBoard.updateCell(x, y, result); // 'hit' or 'miss'
+
+        if (result === "hit") {
+          const sunkShips = this.cpu.gameboard.getSunkShipsCount();
+          this.playerBoard.updateShipsSunk(sunkShips); // Player gets points for sinking CPU's ships
+        }
+
         // permanently disable this cell
         const cell = enemyContainer.querySelector(
           `.cell[data-x='${x}'][data-y='${y}']`,
@@ -85,6 +87,12 @@ class App {
       const lastAttack = Array.from(this.cpu.previousAttacks).pop();
       const [x, y] = lastAttack.split(",").map(Number);
       this.playerBoard.updateCell(x, y, result); // "hit" or "miss"
+
+      if (result === "hit") {
+        const sunkShips = this.player1.gameboard.getSunkShipsCount();
+        this.enemyBoard.updateShipsSunk(sunkShips); // CPU gets points for sinking Player's ships
+      }
+
       this.isPlayerTurn = true;
     } catch (err) {
       // should not happen, but handle gracefully

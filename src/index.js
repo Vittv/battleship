@@ -1,7 +1,7 @@
 require("./styles/main.css");
-const App = require("./app/app");
+const GameController = require("./app/gameController.js");
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const app = new App();
-  app.init();
+document.addEventListener("DOMContentLoaded", () => {
+  const gameController = new GameController();
+  gameController.init();
 });

@@ -1,0 +1,64 @@
+.handoff-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.99);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 10000;
+	animation: fadeIn 0.3s ease;
+}
+
+.handoff-content {
+	text-align: center;
+	color: white;
+	padding: 40px;
+	max-width: 500px;
+}
+
+.handoff-title {
+	font-size: 48px;
+	margin-bottom: 20px;
+	color: #4a90e2;
+	text-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
+}
+
+.handoff-message {
+	font-size: 24px;
+	margin-bottom: 40px;
+	color: #ccc;
+}
+
+.handoff-ready-btn {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	border: none;
+	padding: 15px 40px;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.handoff-ready-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.handoff-ready-btn:active {
+	transform: translateY(0);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

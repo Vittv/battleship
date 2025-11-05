@@ -79,7 +79,41 @@ class GameController {
       // clear placement info
       const placementInfo = document.getElementById("placement-info");
       if (placementInfo) placementInfo.remove();
+
+      // remove any remaining event listeners
+      const boardsContainer = document.querySelector(".boards-container");
+      if (boardsContainer) {
+        const newContainer = boardsContainer.cloneNode(false);
+        boardsContainer.parentNode.replaceChild(newContainer, boardsContainer);
+      }
+
+      // ensure any modals are closed
+      const modals = document.querySelectorAll(".game-modal, .handoff-overlay");
+      modals.forEach((modal) => {
+        if (modal.parentNode) {
+          modal.parentNode.removeChild(modal);
+        }
+      });
+
+      // nullify the current game to ensure garbage collection
+      this.currentGame = null;
     }
+
+    // create boards container if it doesn't exist
+    let boardsContainer = document.querySelector(".boards-container");
+    if (!boardsContainer) {
+      boardsContainer = document.createElement("div");
+      boardsContainer.className = "boards-container";
+      document.querySelector("main").appendChild(boardsContainer);
+    }
+
+    // recreate board divs
+    const playerBoardDiv = document.createElement("div");
+    playerBoardDiv.id = "player-board";
+    const enemyBoardDiv = document.createElement("div");
+    enemyBoardDiv.id = "enemy-board";
+    boardsContainer.appendChild(playerBoardDiv);
+    boardsContainer.appendChild(enemyBoardDiv);
 
     // start new game based on mode
     if (mode === "pve") {

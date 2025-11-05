@@ -121,8 +121,8 @@ class Player {
 
     const [lastX, lastY] = this.lastHit;
     const directions = [
-      [0,  1], // right
-      [1,  0], // down
+      [0, 1], // right
+      [1, 0], // down
       [0, -1], // left
       [-1, 0], // up
     ];

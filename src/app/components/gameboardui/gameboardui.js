@@ -186,7 +186,7 @@ class GameboardUI {
       <div class="gameboard-container">
         <div class="board-header">
           <div class="player-name">${this.playerName}</div>
-          <div class="score">💥 ${this.shipsSunk}</div>
+          <div class="score">X - ${this.shipsSunk}</div>
         </div>
         <div class="gameboard" data-player="${this.playerName.toLowerCase()}">
           ${this.generateGrid()}
@@ -239,9 +239,12 @@ class GameboardUI {
     if (cell) {
       cell.className = `cell ${status}`;
       if (status === "hit") {
-        cell.textContent = "💥";
+        cell.innerHTML = `<span class="mark">X</span>`;
       } else if (status === "miss") {
-        cell.textContent = "💦";
+        cell.innerHTML = `<span class="mark">~</span>`;
+      } else {
+        // clear content for other statuses
+        cell.innerHTML = "";
       }
     }
   }
@@ -252,7 +255,7 @@ class GameboardUI {
     if (container) {
       const scoreElement = container.querySelector(".score");
       if (scoreElement) {
-        scoreElement.textContent = `💥 ${count}`;
+        scoreElement.textContent = `X - ${count}`;
       }
     }
   }

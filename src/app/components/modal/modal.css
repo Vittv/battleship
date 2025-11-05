@@ -2,37 +2,60 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	right: 0;
-	bottom: 0;
+	width: 100vw;
+	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: rgba(0, 0, 0, 0.4);
-	z-index: 1000;
-	transition: opacity 0.5s;
+	background: rgba(0, 0, 0, 0.99);
+	z-index: 10000;
+	animation: fadeIn 0.3s ease;
 }
+
 .modal-content {
-	background: white;
+	background: none;
 	border-radius: 16px;
 	padding: 48px 32px 32px 32px;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+	box-shadow: none;
 	text-align: center;
-}
-.modal-title {
-	font-size: 3em;
-	margin-bottom: 32px;
-}
-.restart-btn {
-	font-size: 1.2em;
-	padding: 12px 32px;
-	border-radius: 8px;
-	border: none;
-	background: #007bff;
 	color: white;
+}
+
+.modal-title {
+	font-size: 48px;
+	margin-bottom: 32px;
+	color: #4a90e2;
+	text-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
+}
+
+.restart-btn {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	border: none;
+	padding: 15px 40px;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 8px;
 	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 	margin-top: 16px;
 }
-body.blurred #main {
-	filter: blur(6px);
-	pointer-events: none;
+
+.restart-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.restart-btn:active {
+	transform: translateY(0);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }

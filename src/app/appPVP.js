@@ -254,8 +254,8 @@ class AppPvP {
       info.id = "placement-info";
       info.style.textAlign = "center";
       info.style.margin = "10px";
-      info.style.fontSize = "18px";
-      info.style.fontWeight = "bold";
+      info.style.fontSize = "1rem";
+      info.style.fontWeight = "400";
       document.body.appendChild(info);
     }
     info.textContent = message;

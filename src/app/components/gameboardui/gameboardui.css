@@ -1,9 +1,8 @@
 .gameboard-container {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
-	text-align: center;
 	margin: 1rem;
 }
 
@@ -11,20 +10,20 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 100%;
-	max-width: 400px;
-	padding: 10px;
+	width: 400px;
+	padding: 10px 0;
 	margin-bottom: 10px;
+	user-select: none;
 }
 
 .player-name {
-	font-size: 1.2em;
-	font-weight: bold;
+	font-size: 1em;
+	font-weight: 300;
 }
 
 .score {
 	font-size: 1.4em;
-	font-weight: bold;
+	font-weight: 300;
 }
 
 .gameboard-container h3 {
@@ -36,9 +35,18 @@
 	display: grid;
 	grid-template-columns: repeat(10, 40px);
 	grid-template-rows: repeat(10, 40px);
-	gap: 2px;
 	justify-content: center;
 	user-select: none;
+
+	background:
+		radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+		radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+		var(--paper-bg);
+
+	background-size:
+		10px 10px,
+		10px 10px;
+	background-attachment: fixed;
 }
 
 .boards-container {
@@ -46,6 +54,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
+	margin-top: 0.7rem;
 }
 
 .cell.ship-placed {
@@ -55,17 +64,35 @@
 .cell {
 	width: 40px;
 	height: 40px;
-	border: 1px solid #3498db;
-	background: #ecf0f1;
+	border-right: 2px solid var(--paper-line);
+	border-bottom: 2px solid var(--paper-line);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	font-size: 1.2rem;
+	font-size: 1.6rem;
+
+	/* set cell background to transparent to let the gameboard's fixed pattern show through */
+	background: transparent;
+	color: var(--paper-text);
+	position: relative;
 }
 
-.cell:hover {
-	background: #bdc3c7;
+/* explicit edge rules to remove outer borders (required when using borders) */
+/* remove outer right border on last column */
+.cell[data-x="9"] {
+	border-right: none;
+}
+/* remove outer bottom border on last row */
+.cell[data-y="9"] {
+	border-bottom: none;
+}
+/* ensure there is no left or top border on first column/row (they are none by default since we only add right/bottom) */
+.cell[data-x="0"] {
+	border-left: none;
+}
+.cell[data-y="0"] {
+	border-top: none;
 }
 
 .cell.ship {
@@ -73,11 +100,28 @@
 }
 
 .cell.hit {
-	background: #e74c3c;
+	/* color the entire square wine-colored and keep the X character colored separately */
+	background: var(--hit-bg);
+	font-weight: 700;
 }
 
 .cell.miss {
-	background: #3498db;
+	background: transparent;
+	font-weight: 700;
+}
+
+/* mark element sits above the decorative background */
+.cell .mark {
+	position: relative;
+	z-index: 2;
+	font-weight: 700;
+}
+
+.cell.hit .mark {
+	color: var(--hit-color);
+}
+.cell.miss .mark {
+	color: var(--miss-color);
 }
 
 .placement-preview {

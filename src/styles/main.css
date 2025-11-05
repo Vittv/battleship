@@ -1,5 +1,11 @@
+@font-face {
+  font-family: "Adwaita Mono";
+  src: url("../fonts/AdwaitaMono-Regular.ttf");
+}
+
 * {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+  font-family: "Adwaita Mono", monospace;
 }

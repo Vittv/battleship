@@ -45,6 +45,23 @@ class GameController {
   }
 
   switchMode(mode) {
+    // if current game is PVE and it's CPU's turn, don't allow switching
+    if (
+      this.currentMode === "pve" &&
+      this.currentGame &&
+      !this.currentGame.isPlayerTurn
+    ) {
+      alert(
+        "Please wait for the CPU to complete its turn before switching modes.",
+      );
+      // revert button state
+      const buttons = document.querySelectorAll(".mode-btn");
+      buttons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.mode === this.currentMode);
+      });
+      return;
+    }
+
     // confirm switch if game is in progress
     const confirmed = confirm(
       "Switching game mode will restart the game. Continue?",

@@ -61,6 +61,12 @@
 	background: #34495e;
 }
 
+.cell.ship-placed-anim {
+	animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+	animation-fill-mode: both;
+}
+
 .cell {
 	width: var(--board-grid-size);
 	height: var(--board-grid-size);
@@ -103,6 +109,9 @@
 	/* color the entire square wine-colored and keep the X character colored separately */
 	background: var(--hit-bg);
 	font-weight: 700;
+	animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+	animation-fill-mode: both;
 }
 
 .cell.miss {
@@ -138,4 +147,21 @@
 }
 .invalid-placement {
 	background-color: rgba(200, 0, 0, 0.5) !important;
+}
+
+@keyframes bounce-in {
+	0% {
+		transform: scale(0.2);
+		opacity: 0;
+	}
+	60% {
+		transform: scale(1.1);
+		opacity: 1;
+	}
+	80% {
+		transform: scale(0.95);
+	}
+	100% {
+		transform: scale(1);
+	}
 }

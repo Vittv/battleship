@@ -111,7 +111,18 @@ class GameboardUI {
         const cell = e.target.parentElement.querySelector(
           `.cell[data-x='${x}'][data-y='${y}']`,
         );
-        if (cell) cell.classList.add("ship-placed");
+        if (cell) {
+          cell.classList.add("ship-placed", "ship-placed-anim");
+
+          // remove animation class after animation ends so it doesn't trigger again
+          cell.addEventListener(
+            "animationend",
+            () => {
+              cell.classList.remove("ship-placed-anim");
+            },
+            { once: true },
+          );
+        }
       });
       this._clearPlacementPreview();
       this.renderShipsFromModel();
@@ -262,19 +273,33 @@ class GameboardUI {
   updateCell(x, y, status) {
     const cell = document.querySelector(
       `.gameboard[data-player="${this.playerName.toLowerCase()}"] 
-       .cell[data-x="${x}"][data-y="${y}"]`,
+     .cell[data-x="${x}"][data-y="${y}"]`,
     );
 
-    if (cell) {
-      cell.className = `cell ${status}`;
-      if (status === "hit") {
-        cell.innerHTML = `<span class="mark">X</span>`;
-      } else if (status === "miss") {
-        cell.innerHTML = `<span class="mark">~</span>`;
-      } else {
-        // clear content for other statuses
-        cell.innerHTML = "";
-      }
+    if (!cell) return;
+
+    // always start clean
+    cell.classList.remove("hit", "miss", "ship-placed");
+
+    // add the new status
+    cell.classList.add(status);
+
+    // trigger animation every time
+    cell.style.animation = "none"; // reset
+    // force reflow to restart animation
+    void cell.offsetWidth;
+    // reapply animation
+    cell.style.animation =
+      "bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)";
+    cell.style.animationFillMode = "both";
+
+    // update inner mark
+    if (status === "hit") {
+      cell.innerHTML = `<span class="mark">X</span>`;
+    } else if (status === "miss") {
+      cell.innerHTML = `<span class="mark">~</span>`;
+    } else {
+      cell.innerHTML = "";
     }
   }
 

@@ -7,48 +7,41 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: rgba(0, 0, 0, 0.99);
+	background: var(--paper-bg);
 	z-index: 10000;
 	animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
 	background: none;
-	border-radius: 16px;
-	padding: 48px 32px 32px 32px;
-	box-shadow: none;
+	padding: 32px;
 	text-align: center;
-	color: white;
+	color: var(--paper-text);
 }
 
 .modal-title {
-	font-size: 48px;
+	font-size: 2rem;
 	margin-bottom: 32px;
-	color: #4a90e2;
-	text-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
+	color: var(--paper-text);
+	font-weight: 400;
 }
 
 .restart-btn {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	color: white;
-	border: none;
-	padding: 15px 40px;
-	font-size: 20px;
-	font-weight: bold;
-	border-radius: 8px;
+	display: inline-flex;
+	align-items: center;
+	padding: 8px 16px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+	color: var(--paper-text);
+	font-size: 0.9rem;
+	font-weight: 400;
 	cursor: pointer;
-	transition: all 0.3s ease;
-	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-	margin-top: 16px;
+	transition: all 0.2s ease;
 }
 
 .restart-btn:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-}
-
-.restart-btn:active {
-	transform: translateY(0);
+	background: rgba(255, 255, 255, 0.1);
 }
 
 @keyframes fadeIn {

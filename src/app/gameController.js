@@ -14,39 +14,34 @@ class GameController {
   }
 
   createModeToggle() {
-    // create toggle container
     const toggleContainer = document.createElement("div");
-    toggleContainer.className = "mode-toggle-container";
-    toggleContainer.innerHTML = `
-      <div class="mode-toggle">
-        <button class="mode-btn active" data-mode="pve">
-          <span class="mode-icon">🤖</span>
-          <span class="mode-label">PVE</span>
-        </button>
-        <button class="mode-btn" data-mode="pvp">
-          <span class="mode-icon">👥</span>
-          <span class="mode-label">PVP</span>
-        </button>
-      </div>
-    `;
+    toggleContainer.className = "mode-toggle";
 
-    document.body.appendChild(toggleContainer);
+    const header = document.querySelector("header");
+    header.insertAdjacentElement("afterend", toggleContainer);
 
-    // add click handlers
-    const buttons = toggleContainer.querySelectorAll(".mode-btn");
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const mode = btn.dataset.mode;
-        if (mode === this.currentMode) return;
+    // single toggle button
+    const toggleBtn = document.createElement("button");
+    toggleBtn.className = "mode-btn";
+    this.updateModeButton(toggleBtn);
+    toggleContainer.appendChild(toggleBtn);
 
-        // update active state
-        buttons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        // switch game mode
-        this.switchMode(mode);
-      });
+    toggleBtn.addEventListener("click", () => {
+      const newMode = this.currentMode === "pve" ? "pvp" : "pve";
+      this.switchMode(newMode);
+      this.updateModeButton(toggleBtn);
     });
+  }
+
+  updateModeButton(btn) {
+    const isPVE = this.currentMode === "pve";
+    btn.innerHTML = `
+      <span class="mode-text">
+        <span class="mode-pve ${!isPVE ? "active" : ""}">PVE</span>
+        /
+        <span class="mode-pvp ${isPVE ? "active" : ""}">PVP</span>
+      </span>
+    `;
   }
 
   switchMode(mode) {
@@ -78,7 +73,7 @@ class GameController {
 
       // clear placement info
       const placementInfo = document.getElementById("placement-info");
-      if (placementInfo) placementInfo.remove();
+      if (placementInfo) placementInfo.textContent = "";
 
       // remove any remaining event listeners
       const boardsContainer = document.querySelector(".boards-container");
@@ -104,7 +99,16 @@ class GameController {
     if (!boardsContainer) {
       boardsContainer = document.createElement("div");
       boardsContainer.className = "boards-container";
-      document.querySelector("main").appendChild(boardsContainer);
+      const main = document.querySelector("main");
+      main.appendChild(boardsContainer);
+
+      // create placement info if it doesn't exist
+      let placementInfo = document.getElementById("placement-info");
+      if (!placementInfo) {
+        placementInfo = document.createElement("div");
+        placementInfo.id = "placement-info";
+        main.appendChild(placementInfo);
+      }
     }
 
     // recreate board divs

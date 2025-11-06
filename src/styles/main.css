@@ -22,9 +22,30 @@
 	--hit-color: #f6eddc;
 	--miss-color: #9ed0ff;
 	--hit-bg: #7b112b;
-	--board-grid-size: 40px;
+	--board-grid-size: 35px; /* default size for mobile */
 	--board-grid-offset-x: 50%;
 	--board-grid-offset-y: 160px;
+}
+
+/* tablet and small desktop screens */
+@media screen and (min-width: 768px) {
+	:root {
+		--board-grid-size: 40px;
+	}
+}
+
+/* large desktop screens */
+@media screen and (min-width: 1200px) {
+	:root {
+		--board-grid-size: 45px;
+	}
+}
+
+/* extra large screens */
+@media screen and (min-width: 1600px) {
+	:root {
+		--board-grid-size: 50px;
+	}
 }
 
 html,
@@ -50,6 +71,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+header {
+	margin-bottom: 0.5rem;
+}
+
 header h1 {
 	text-align: center;
 	padding: 1rem;
@@ -58,8 +83,61 @@ header h1 {
 	font-weight: 300;
 	font-family: "Playfair Display", serif;
 	letter-spacing: 0.4rem;
+	border-bottom: 0.2rem solid var(--hit-bg);
 }
 
 #placement-info {
+	text-align: center;
 	font-weight: 400;
+	margin: 1rem 0;
+	user-select: none;
+}
+
+.rotate-btn {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 12px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+	color: var(--paper-text);
+	font-size: inherit;
+	cursor: pointer;
+	margin-left: 8px;
+}
+
+.rotate-btn:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.rotate-btn strong {
+	color: var(--hit-color);
+}
+
+#content {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
+}
+
+.github-link {
+	display: flex;
+	justify-content: center;
+	margin: 2rem auto;
+	opacity: 0.6;
+	transition: opacity 0.2s ease;
+}
+
+.github-link:hover {
+	opacity: 1;
+}
+
+.github-link svg {
+	width: 24px;
+	height: 24px;
+	fill: var(--paper-text);
 }

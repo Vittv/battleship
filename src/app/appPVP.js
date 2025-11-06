@@ -178,7 +178,7 @@ class AppPvP {
         this.checkWinner();
       }
 
-      // cisable the attacked cell
+      // disable the attacked cell
       const container =
         attacker === this.player1
           ? document.getElementById("enemy-board")
@@ -248,17 +248,10 @@ class AppPvP {
   }
 
   _showPlacementInfo(message) {
-    let info = document.getElementById("placement-info");
-    if (!info) {
-      info = document.createElement("div");
-      info.id = "placement-info";
-      info.style.textAlign = "center";
-      info.style.margin = "10px";
-      info.style.fontSize = "1rem";
-      info.style.fontWeight = "400";
-      document.body.appendChild(info);
+    const info = document.getElementById("placement-info");
+    if (info) {
+      info.textContent = message;
     }
-    info.textContent = message;
   }
 
   _hideShipsOnBoard(containerId) {
@@ -278,7 +271,6 @@ class AppPvP {
     if (!container || !player || !player.gameboard) return;
 
     const grid = player.gameboard.grid;
-    const playerName = player.name.toLowerCase();
 
     for (let y = 0; y < player.gameboard.size; y++) {
       for (let x = 0; x < player.gameboard.size; x++) {

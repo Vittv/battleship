@@ -118,11 +118,13 @@ class GameboardUI {
       this.currentShipIdx++;
       if (this.currentShipIdx >= this.shipsToPlace.length) {
         this.placingShips = false;
-        this._showPlacementMessage("All ships placed!");
+        // remove event listeners and clean up
         document.removeEventListener(
           "keydown",
           this._handleOrientationToggle.bind(this),
         );
+        // remove the rotate button and show completion message
+        this._showPlacementMessage("All ships placed!");
         if (this._onPlacementComplete) this._onPlacementComplete();
       } else {
         this._showPlacementMessage();
@@ -156,15 +158,42 @@ class GameboardUI {
     if (!info) {
       info = document.createElement("div");
       info.id = "placement-info";
-      info.style.textAlign = "center";
-      info.style.margin = "10px";
       document.body.appendChild(info);
     }
+
+    // only show placement and rotation options if we're actively placing ships
     if (!msg && this.placingShips) {
       const ship = this.shipsToPlace[this.currentShipIdx];
-      msg = `Place your ${ship.name} (length ${ship.length}) - Orientation: ${this.orientation.toUpperCase()} (press 'R' to rotate)`;
+      console.log(`Place your ${ship.name} (length ${ship.length})`);
+
+      const rotateBtn = `<button class="rotate-btn">Press 'R' or click&nbsp;<strong>ROTATE</strong></button>`;
+      msg = `Placing ${ship.name} - ${this.orientation.toUpperCase()} ${rotateBtn}`;
     }
-    info.textContent = msg || "";
+
+    info.innerHTML = msg || "";
+
+    // only add rotation functionality if we're still placing ships
+    const rotateBtn = info.querySelector(".rotate-btn");
+    if (rotateBtn && this.placingShips) {
+      rotateBtn.addEventListener("click", () => {
+        this.orientation =
+          this.orientation === "horizontal" ? "vertical" : "horizontal";
+        this._showPlacementMessage();
+
+        // update hover preview if mouse is over a cell
+        const board = document.querySelector(
+          `.gameboard[data-player='${this.playerName.toLowerCase()}']`,
+        );
+        if (board) {
+          const hovered = board.querySelector(".cell:hover");
+          if (hovered) {
+            this._handlePlacementHover({ target: hovered });
+          } else {
+            this._clearPlacementPreview();
+          }
+        }
+      });
+    }
   }
   constructor(playerName, isInteractive = false) {
     this.playerName = playerName;

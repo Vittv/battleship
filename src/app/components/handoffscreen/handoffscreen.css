@@ -4,7 +4,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.99);
+	background: var(--paper-bg);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -14,44 +14,40 @@
 
 .handoff-content {
 	text-align: center;
-	color: white;
-	padding: 40px;
+	color: var(--paper-text);
+	padding: 32px;
 	max-width: 500px;
 }
 
 .handoff-title {
-	font-size: 48px;
+	font-size: 2rem;
 	margin-bottom: 20px;
-	color: #4a90e2;
-	text-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
+	color: var(--paper-text);
+	font-weight: 400;
 }
 
 .handoff-message {
-	font-size: 24px;
-	margin-bottom: 40px;
-	color: #ccc;
+	font-size: 1.1rem;
+	margin-bottom: 32px;
+	opacity: 0.8;
 }
 
 .handoff-ready-btn {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	color: white;
-	border: none;
-	padding: 15px 40px;
-	font-size: 20px;
-	font-weight: bold;
-	border-radius: 8px;
+	display: inline-flex;
+	align-items: center;
+	padding: 8px 16px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+	color: var(--paper-text);
+	font-size: 0.9rem;
+	font-weight: 400;
 	cursor: pointer;
-	transition: all 0.3s ease;
-	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+	transition: all 0.2s ease;
 }
 
 .handoff-ready-btn:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-}
-
-.handoff-ready-btn:active {
-	transform: translateY(0);
+	background: rgba(255, 255, 255, 0.1);
 }
 
 @keyframes fadeIn {

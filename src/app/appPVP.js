@@ -178,6 +178,12 @@ class AppPvP {
         this.checkWinner();
       }
 
+      // disable both boards immediately so no further clicks register this turn
+      const player1Container = document.getElementById("player-board");
+      const player2Container = document.getElementById("enemy-board");
+      if (player1Container) player1Container.style.pointerEvents = "none";
+      if (player2Container) player2Container.style.pointerEvents = "none";
+
       // disable the attacked cell
       const container =
         attacker === this.player1

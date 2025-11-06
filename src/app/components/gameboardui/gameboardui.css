@@ -149,6 +149,12 @@
 	background-color: rgba(200, 0, 0, 0.5) !important;
 }
 
+.board-disabled {
+	pointer-events: none;
+	opacity: 0.6;
+	transition: opacity 0.3s ease;
+}
+
 @keyframes bounce-in {
 	0% {
 		transform: scale(0.2);

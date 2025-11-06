@@ -178,7 +178,7 @@ class AppPvP {
         this.checkWinner();
       }
 
-      // disable both boards immediately so no further clicks register this turn
+      // disable UI interactions (visual safety)
       const player1Container = document.getElementById("player-board");
       const player2Container = document.getElementById("enemy-board");
       if (player1Container) player1Container.style.pointerEvents = "none";
@@ -196,19 +196,25 @@ class AppPvP {
         cell.style.pointerEvents = "none";
       }
 
-      // switch turns with handoff screen
-      this.switchTurns();
+      // add visual freeze to the board
+      container.classList.add("board-disabled");
+
+      // switch turns
+      this.switchTurns(container);
     } catch (err) {
       alert(err.message);
     }
   }
 
-  switchTurns() {
+  switchTurns(container) {
     const nextPlayer = this.currentPlayer === 1 ? 2 : 1;
 
     this.handoffScreen.show(`Player ${nextPlayer}`, () => {
       this.currentPlayer = nextPlayer;
       this.updateBoardsForCurrentPlayer();
+
+      // restore board interactivity and appearance after handoff screen
+      if (container) container.classList.remove("board-disabled");
     });
   }
 
